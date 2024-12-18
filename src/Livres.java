@@ -1,34 +1,60 @@
-public class Livres {
-    private final String titre;
-    private final String auteur;
-    private final String isbn;
-    private final int annee;
-    private boolean emprunte;
+public abstract class Livres {
+    private static int compteur = 1;
 
-    public Livres(String titre, String auteur, String isbn, int annee) {
+    private int isbn;
+    private String titre;
+    private String auteur;
+    private int annee;
+
+    public Livres(String titre, String auteur, int annee) {
+        this.isbn = compteur;
         this.titre = titre;
         this.auteur = auteur;
-        this.isbn = isbn;
         this.annee = annee;
-        this.emprunte = false;
+
+        compteur += 1;
     }
 
-    public String getTitre() { return this.titre; }
-    public String getAuteur() { return this.auteur; }
-    public String getIsbn() { return this.isbn; }
-    public int getAnnee() { return this.annee; }
-
-    public boolean isEmprunte() { return this.emprunte; }
-    public void setEmprunte(boolean emprunte) { this.emprunte = emprunte; }
-
-    @Override
     public String toString() {
-        return "Livres{" +
-                "titre='" + this.titre + '\'' +
-                ", auteur='" + this.auteur + '\'' +
-                ", isbn='" + this.isbn + '\'' +
-                ", annee=" + this.annee +
-                ", emprunte=" + this.emprunte +
-                '}';
+        String message = "";
+
+        message += ConsoleColors.println(ConsoleColors.CYAN, getIsbn() + " - ");
+        message += ConsoleColors.println(ConsoleColors.PURPLE, getTitre() + " - ");
+        message += ConsoleColors.println(ConsoleColors.YELLOW, getAuteur() + " - ");
+        message += ConsoleColors.println(ConsoleColors.GREEN, getAnnee() + " - ");
+
+        return message;
+    }
+
+    public int getIsbn() {
+        return isbn;
+    }
+
+    public String getTitre() {
+        return titre;
+    }
+
+    public String getAuteur() {
+        return auteur;
+    }
+
+    public int getAnnee() {
+        return annee;
+    }
+
+    public void setIsbn(int isbn) {
+        this.isbn = isbn;
+    }
+
+    public void setTitre(String titre) {
+        this.titre = titre;
+    }
+
+    public void setAuteur(String auteur) {
+        this.auteur = auteur;
+    }
+
+    public void setAnnee(int annee) {
+        this.annee = annee;
     }
 }

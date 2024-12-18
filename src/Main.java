@@ -1,86 +1,106 @@
-import java.util.Scanner;
 import java.util.Date;
+import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) {
-        Bibliotheque bibliotheque = new Bibliotheque();
-        JeuEssai.chargerJeuEssai(bibliotheque);
-
-        Scanner sc = new Scanner(System.in);
-        int choix;
+        Bibliotheque bibliotheque = new Bibliotheque("Bibliothèque de Saint-Sauveur de Peyre");
+        bibliotheque.addData();
 
         do {
-            afficherMenu();
-            choix = Integer.parseInt(sc.nextLine());
-            switch (choix) {
-                case 1 -> ajouterLivre(bibliotheque, sc);
-                case 2 -> ajouterAdherent(bibliotheque, sc);
-                case 3 -> bibliotheque.getLivres();
-                case 4 -> bibliotheque.getAdherents();
-                case 5 -> bibliotheque.getEmprunts();
-                case 6 -> ajouterEmprunt(bibliotheque, sc);
-                case 8 -> System.exit(0);
-                default -> System.out.println("Choix invalide");
+            afficherMenu(bibliotheque);
+        } while (true);
+    }
+
+    public static void afficherMenu (Bibliotheque bibliotheque){
+        int nb = bibliotheque.getNom().length();
+
+        System.out.println("|--------------- " + bibliotheque.getNom() + " ---------------|");
+        System.out.println("| 1. Afficher les livres de la bibliothèque");
+        System.out.println("| 2. Afficher les adhérents de la bibliothèque");
+        System.out.println("| 3. Afficher l'historique des emprunts");
+        System.out.println("| 4. Afficher les emprunts d'un adhérent");
+        System.out.println("| 5. Ajouter un livre");
+        System.out.println("| 6. Ajouter un adhérent");
+        System.out.println("| 7. Emprunter un livre");
+        System.out.println("| 8. Rendre un livre");
+        System.out.println("| 9. Quitter");
+        System.out.print("| Veuillez saisir le numéro de l'option souhaitée : ");
+
+        Scanner scanner = new Scanner(System.in);
+        int option = scanner.nextInt();
+
+        System.out.println("|----------------" + "-".repeat(nb) + "----------------|");
+
+        switch (option) {
+            case 1 -> bibliotheque.afficherLivres();
+            case 2 -> bibliotheque.afficherAdherents();
+            case 3 -> bibliotheque.afficherHistoriqueEmprunts();
+            case 4 -> {
+                System.out.print("Veuillez saisir le numéro de l'adhérent : ");
+                int numeroAdherent = scanner.nextInt();
+                bibliotheque.afficherEmpruntsAdherent(numeroAdherent);
             }
-        } while (choix != 8);
-    }
+            case 5 -> {
+                System.out.print("Quel est le type du livre ? (1. Roman, 2. Revue) ? ");
+                int typeLivre = scanner.nextInt();
 
-    private static void afficherMenu() {
-        System.out.println("\n|---------- MENU ----------|");
-        System.out.println("| 1. Ajouter un livre      |");
-        System.out.println("| 2. Ajouter un adherent   |");
-        System.out.println("| 3. Afficher livres       |");
-        System.out.println("| 4. Afficher adherents    |");
-        System.out.println("| 5. Afficher emprunts     |");
-        System.out.println("| 6. Ajouter un emprunt    |");
-        System.out.println("| 8. Quitter               |");
-        System.out.println("|--------------------------|");
-        System.out.print("| Votre choix : ");
-    }
+                System.out.print("Quel est le titre du livre ? ");
+                String titre = scanner.nextLine();
+                System.out.print("Quel est l'auteur du livre ? ");
+                String auteur = scanner.nextLine();
+                System.out.print("Quelle est l'année de publication du livre ? ");
+                int annee = scanner.nextInt();
+                switch (typeLivre) {
+                    case 1 -> {
+                        System.out.print("Quel est le nombre de pages du livre ? ");
+                        int nbPages = scanner.nextInt();
+                        System.out.print("Quelle est la langue du livre ? ");
+                        String langue = scanner.nextLine();
+                        bibliotheque.ajouterLivre(new Roman(titre, auteur, annee, nbPages, langue));
+                    }
+                    case 2 -> {
+                        System.out.print("Quel est le thème de la revue ? ");
+                        String theme = scanner.nextLine();
+                        bibliotheque.ajouterLivre(new Revue(titre, auteur, annee, theme));
+                    }
+                }
+            }
+            case 6 -> {
+                System.out.print("Quel est le prénom de l'adhérent ? ");
+                String prenom = scanner.nextLine();
+                System.out.print("Quel est le nom de l'adhérent ? ");
+                String nom = scanner.nextLine();
+                System.out.print("Quelle est l'adresse de l'adhérent ? ");
+                String adresse = scanner.nextLine();
+                System.out.print("Quel est le numéro de téléphone de l'adhérent ? ");
+                String telephone = scanner.nextLine();
+                System.out.print("Quelle est l'année de naissance de l'adhérent ? ");
+                int anneeNaissance = scanner.nextInt();
+                bibliotheque.ajouterAdherent(new Adherents(prenom, nom, adresse, telephone, anneeNaissance));
+            }
+            case 7 -> {
+                System.out.print("Veuillez saisir le numéro de l'adhérent :");
+                int numeroAdherent = scanner.nextInt();
+                System.out.print("Veuillez saisir le numéro du livre :");
+                int numeroLivre = scanner.nextInt();
+                bibliotheque.ajouterReservation(new Reservations(bibliotheque.getLivre(numeroLivre), bibliotheque.getAdherent(numeroAdherent), new Date()));
+            }
+            case 8 -> {
+                System.out.print("Veuillez saisir le numéro de l'adhérent :");
+                int numeroAdherent = scanner.nextInt();
+                System.out.print("Veuillez saisir le numéro du livre :");
+                int numeroLivre = scanner.nextInt();
 
-    private static void ajouterLivre(Bibliotheque b, Scanner sc) {
-        System.out.print("Titre : ");
-        String titre = sc.nextLine();
-        System.out.print("Auteur : ");
-        String auteur = sc.nextLine();
-        System.out.print("ISBN : ");
-        String isbn = sc.nextLine();
-        System.out.print("Annee : ");
-        int annee = Integer.parseInt(sc.nextLine());
-        b.ajouterLivre(new Livres(titre, auteur, isbn, annee));
-    }
-
-    private static void ajouterAdherent(Bibliotheque b, Scanner sc) {
-        System.out.print("Nom : ");
-        String nom = sc.nextLine();
-        System.out.print("Prenom : ");
-        String prenom = sc.nextLine();
-        System.out.print("Adresse : ");
-        String adresse = sc.nextLine();
-        b.ajouterAdherent(new Adherents(nom, prenom, adresse, "", ""));
-    }
-
-    private static void ajouterEmprunt(Bibliotheque b, Scanner sc) {
-        System.out.print("ISBN du livre : ");
-        String isbn = sc.nextLine();
-        Livres livre = b.searchLivreByIsbn(isbn);
-
-        if (livre == null || livre.isEmprunte()) {
-            System.out.println("Livre indisponible ou introuvable.");
-            return;
+                for (Reservations reservation : bibliotheque.getReservations()) {
+                    if (reservation.getAdherent().getId() == numeroAdherent && reservation.getLivre().getIsbn() == numeroLivre) {
+                        reservation.setEnCours(false);
+                        bibliotheque.supprimerReservation(reservation);
+                        break;
+                    }
+                }
+            }
+            case 9 -> System.exit(0);
+            default -> System.out.println("Option invalide");
         }
-
-        System.out.print("Nom de l'adherent : ");
-        String nom = sc.nextLine();
-        Adherents adherent = b.searchAdherentByNom(nom);
-
-        if (adherent == null) {
-            System.out.println("Adherent introuvable.");
-            return;
-        }
-
-        livre.setEmprunte(true);
-        b.ajouterEmprunt(new Emprunts(new Date().toString(), "", livre, adherent));
-        System.out.println("Emprunt ajoute avec succes.");
     }
 }
