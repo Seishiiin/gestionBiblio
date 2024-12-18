@@ -11,7 +11,7 @@ import java.util.ArrayList;
 import static fr.seishin.libs.TerminalColor.*;
 
 public class Utils {
-    public static int[] getMaxLenghtBookAndMembresAndRentals(ArrayList<Book> books, ArrayList<Member> members, ArrayList<Rental> rentals) {
+    public static int[] getMaxLengthBookAndMembresAndRentals(ArrayList<Book> books, ArrayList<Member> members, ArrayList<Rental> rentals) {
         int maxfirst = 0, maxsecond = 0, maxthird = 0, maxfourth = 0;
 
         for (Book book : books) {
@@ -38,63 +38,39 @@ public class Utils {
         return new int[]{maxfirst, maxsecond, maxthird, maxfourth};
     }
 
-    public static void manageChoiceMenu(int[] maxlenght, Library library, int choice) {
+    public static void manageChoiceMenu(int[] maxlength, Library library, int choice) {
         switch (choice) {
-            case 10 -> Display.displayBooks(maxlenght, library.getBooks());
+            case 10 -> Display.displayBooks(maxlength, library.getBooks());
             case 11 -> AddData.addBook(library);
             case 12 -> UpdateData.updateBook(library);
             case 13 -> DeleteData.deleteBook(library);
             case 14 -> SearchData.searchBook(library);
+            case 15 -> Display.displayBooks(maxlength, library.getHistoryBook());
 
-            case 20 -> Display.displayMembers(maxlenght, library.getMembers());
+            case 20 -> Display.displayMembers(maxlength, library.getMembers());
             case 21 -> AddData.addMember(library);
             case 22 -> UpdateData.updateMember(library);
             case 23 -> DeleteData.deleteMember(library);
             case 24 -> SearchData.searchMember(library);
+            case 25 -> Display.displayMembers(maxlength, library.getHistoryMember());
 
-            case 30 -> Display.displayRentals(maxlenght, library.getRentals());
+            case 30 -> Display.displayRentals(maxlength, library.getRentals());
             case 31 -> AddData.addRental(library);
-            case 32 -> DeleteData.deleteRental(library);
-            case 33 -> SearchData.searchRental(library);
+            case 33 -> DeleteData.deleteRental(library);
+            case 34 -> SearchData.searchRental(library);
+            case 35 -> Display.displayRentals(maxlength, library.getHistoryRental());
 
-            case 90 -> System.exit(0);
+            case 99 -> System.exit(0);
 
-            default -> System.out.println("Choix invalide.");
+            default -> System.out.println(colorize("-> Erreur : Veuillez saisir un nombre valide.", RED));
         }
 
         System.out.println();
     }
 
-    private static void updateBook(Library library) {
-
-    }
-
-    private static void deleteBook(Library library) {
-
-    }
-
-    private static void searchBook(Library library) {
-
-    }
-
-    private static void updateMember(Library library) {
-
-    }
-
-    private static void deleteMember(Library library) {
-
-    }
-
-    private static void searchMember(Library library) {
-
-    }
-
-    private static void deleteRental(Library library) {
-
-    }
-
-    private static void searchRental(Library library) {
-
+    private static void clearConsole() {
+        System.out.print("\033[H\033[2J");
+        System.out.flush();
     }
 
     public static String getMemberTypeColor(Member member) {

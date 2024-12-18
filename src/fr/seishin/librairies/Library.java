@@ -8,9 +8,12 @@ import java.util.ArrayList;
 
 public class Library {
     private String name;
-    private ArrayList<Book> books = new ArrayList<>();
-    private ArrayList<Member> members = new ArrayList<>();
-    private ArrayList<Rental> rentals = new ArrayList<>();
+    private final ArrayList<Book> books = new ArrayList<>();
+    private final ArrayList<Member> members = new ArrayList<>();
+    private final ArrayList<Rental> rentals = new ArrayList<>();
+    private final ArrayList<Book> historyBook = new ArrayList<>();
+    private final ArrayList<Member> historyMember = new ArrayList<>();
+    private final ArrayList<Rental> historyRental = new ArrayList<>();
 
     public Library(String name) {
         this.name = name;
@@ -20,12 +23,24 @@ public class Library {
         books.add(book);
     }
 
+    public void addHistoryBook(Book book) {
+        historyBook.add(book);
+    }
+
     public void addMember(Member member) {
         members.add(member);
     }
 
+    public void addHistoryMember(Member member) {
+        historyMember.add(member);
+    }
+
     public void addRental(Rental rental) {
         rentals.add(rental);
+    }
+
+    public void addHistoryRental(Rental rental) {
+        historyRental.add(rental);
     }
 
     public void removeBook(Book book) {
@@ -83,7 +98,15 @@ public class Library {
         return rentals;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public ArrayList<Book> getHistoryBook() {
+        return historyBook;
+    }
+
+    public ArrayList<Member> getHistoryMember() {
+        return historyMember;
+    }
+
+    public ArrayList<Rental> getHistoryRental() {
+        return historyRental;
     }
 }

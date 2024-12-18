@@ -15,6 +15,7 @@ public class DeleteData {
             String isbn = scanner.nextLine();
 
             if (library.getBookByIsbn(Integer.parseInt(isbn)) != null) {
+                library.addHistoryBook(library.getBookByIsbn(Integer.parseInt(isbn)));
                 library.removeBook(library.getBookByIsbn(Integer.parseInt(isbn)));
                 System.out.println(colorize("\n-> Succès : Livre supprimé. \n", GREEN));
             } else {
@@ -33,6 +34,7 @@ public class DeleteData {
             int id = scanner.nextInt();
 
             if (library.getMemberById(id) != null) {
+                library.addHistoryMember(library.getMemberById(id));
                 library.removeMember(library.getMemberById(id));
                 System.out.println(colorize("\n-> Succès : Membre supprimé. \n", GREEN));
             } else {
@@ -51,6 +53,9 @@ public class DeleteData {
             int id = scanner.nextInt();
 
             if (library.getRentalById(id) != null) {
+                library.addHistoryRental(library.getRentalById(id));
+                library.getRentalById(id).getBook().setIsAvailable(true);
+                library.getRentalById(id).getBook().setBorrowedBy(null);
                 library.removeRental(library.getRentalById(id));
                 System.out.println(colorize("\n-> Succès : Location supprimée. \n", GREEN));
             } else {
