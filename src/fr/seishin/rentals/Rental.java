@@ -9,10 +9,10 @@ import java.util.Date;
 public abstract class Rental {
     private static int count = 1;
 
-    private int id;
-    private Book book;
-    private Member member;
-    private Date dateStart;
+    private final int id;
+    private final Book book;
+    private final Member member;
+    private final Date dateStart;
     protected Date dateEnd;
 
     public Rental(Book book, Member member, Date dateStart) {
@@ -24,27 +24,9 @@ public abstract class Rental {
         count += 1;
     }
 
-    public boolean isLate() {
-        return dateEnd.before(new Date());
-    }
-
-    public int getId() {
-        return id;
-    }
-
-    public Book getBook() {
-        return book;
-    }
-
-    public Member getMember() {
-        return member;
-    }
-
-    public String getDateStart() {
-        return new SimpleDateFormat("dd/MM/yyyy").format(dateStart);
-    }
-
-    public String getDateEnd() {
-        return new SimpleDateFormat("dd/MM/yyyy").format(dateEnd);
-    }
+    public boolean isLate() { return dateEnd.before(new Date()); }
+    public int getId() { return id; }
+    public Book getBook() { return book; }
+    public Member getMember() { return member; }
+    public String getDateEnd() { return new SimpleDateFormat("dd/MM/yyyy").format(dateEnd); }
 }

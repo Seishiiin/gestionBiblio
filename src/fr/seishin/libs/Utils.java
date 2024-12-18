@@ -60,6 +60,13 @@ public class Utils {
             case 34 -> SearchData.searchRental(library);
             case 35 -> Display.displayRentals(maxlength, library.getHistoryRental());
 
+            case 40 -> Display.displayStatsLibrary(library);
+            case 41 -> Display.displayStatsBooks(library);
+            case 42 -> Display.displayStatsMembers(library);
+            case 43 -> Display.displayStatsRentals(library);
+
+            case 50 -> UpdateData.updateLibrary(library);
+
             case 99 -> System.exit(0);
 
             default -> System.out.println(colorize("-> Erreur : Veuillez saisir un nombre valide.", RED));
@@ -68,14 +75,9 @@ public class Utils {
         System.out.println();
     }
 
-    private static void clearConsole() {
-        System.out.print("\033[H\033[2J");
-        System.out.flush();
-    }
-
     public static String getMemberTypeColor(Member member) {
         return switch (member) {
-            case MemberRegular memberRegular -> colorize("(membre régulier)", ORANGE);
+            case MemberRegular memberRegular -> colorize("(membre régulier)", GREEN);
             case MemberOccasional memberOccasional -> colorize("(membre occasionnel)", RED);
             case MemberVisitor memberVisitor -> colorize("(visiteur)", BLUE);
             default -> "";

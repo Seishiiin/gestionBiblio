@@ -74,4 +74,8 @@ public class UpdateData {
             System.out.println(colorize("\n-> Erreur : L'ID doit être un nombre valide. \n", RED));
         }
     }
+
+    public static void updateLibrary(Library library) {
+
+    }
 }

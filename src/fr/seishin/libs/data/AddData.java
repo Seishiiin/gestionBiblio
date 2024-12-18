@@ -188,13 +188,13 @@ public class AddData {
                 switch (choice) {
                     case "1" -> {
                         library.addRental(new RentalShort(library.getBooks().get(idBook - 1), library.getMembers().get(idMember - 1), new Date()));
-                        library.getBooks().get(idBook - 1).setIsAvailable(false);
+                        library.getBooks().get(idBook - 1).setAvailable(false);
                         library.getBooks().get(idBook - 1).setBorrowedBy(library.getMembers().get(idMember - 1));
                         System.out.println(colorize("\n-> Succès : Location courte ajoutée. \n", GREEN));
                     }
                     case "2" -> {
                         library.addRental(new RentalLong(library.getBooks().get(idBook - 1), library.getMembers().get(idMember - 1), new Date()));
-                        library.getBooks().get(idBook - 1).setIsAvailable(false);
+                        library.getBooks().get(idBook - 1).setAvailable(false);
                         library.getBooks().get(idBook - 1).setBorrowedBy(library.getMembers().get(idMember - 1));
                         System.out.println(colorize("\n-> Succès : Location longue ajoutée. \n", GREEN));
                     }

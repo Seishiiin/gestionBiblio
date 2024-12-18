@@ -54,7 +54,7 @@ public class DeleteData {
 
             if (library.getRentalById(id) != null) {
                 library.addHistoryRental(library.getRentalById(id));
-                library.getRentalById(id).getBook().setIsAvailable(true);
+                library.getRentalById(id).getBook().setAvailable(true);
                 library.getRentalById(id).getBook().setBorrowedBy(null);
                 library.removeRental(library.getRentalById(id));
                 System.out.println(colorize("\n-> Succès : Location supprimée. \n", GREEN));

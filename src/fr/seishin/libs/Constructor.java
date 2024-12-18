@@ -17,7 +17,7 @@ public class Constructor {
     public static void Rental(Rental rental, Library library) {
         library.addRental(rental);
 
-        rental.getBook().setIsAvailable(false);
+        rental.getBook().setAvailable(false);
         rental.getBook().setBorrowedBy(rental.getMember());
     }
 }

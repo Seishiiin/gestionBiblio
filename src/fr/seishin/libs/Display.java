@@ -38,6 +38,13 @@ public class Display {
         System.out.println("| 34. " + colorize("Rechercher", PURPLE) + " un emprunt");
         System.out.println("| 35. " + colorize("Historique", PURPLE) + " des emprunts");
         System.out.println("|");
+        System.out.println("| 40. " + colorize("Afficher", GREEN) + " les statistiques");
+        System.out.println("| 41. " + colorize("Afficher", GREEN) + " les statistiques des livres");
+        System.out.println("| 42. " + colorize("Afficher", GREEN) + " les statistiques des membres");
+        System.out.println("| 43. " + colorize("Afficher", GREEN) + " les statistiques des emprunts");
+        System.out.println("|");
+        System.out.println("| 50. " + colorize("Modifier", YELLOW) + " les informations de la bibliothèque");
+        System.out.println("|");
         System.out.println("| 99. " + colorize("Quitter", RED) + " le programme");
         System.out.println("|");
         System.out.print("| Faites votre choix : ");
@@ -120,5 +127,35 @@ public class Display {
         System.out.println("Titre : " + colorize(rental.getBook().getTitle(), PURPLE));
         System.out.println("Emprunteur : " + colorize(rental.getMember().getName() + " " + rental.getMember().getFirstName(), YELLOW));
         System.out.println("Date de retour : " + Utils.getDateLateColor(rental));
+    }
+
+    public static void displayStatsLibrary(Library library) {
+        System.out.println("Statistiques de la bibliothèque " + colorize(library.getName(), PURPLE));
+        System.out.println("Nombre de livres : " + colorize(String.valueOf(library.getBooks().size()), CYAN));
+        System.out.println("Nombre de membres : " + colorize(String.valueOf(library.getMembers().size()), CYAN));
+        System.out.println("Nombre d'emprunts : " + colorize(String.valueOf(library.getRentals().size()), CYAN));
+    }
+
+    public static void displayStatsBooks(Library library) {
+        System.out.println("Statistiques des livres de la bibliothèque " + colorize(library.getName(), PURPLE));
+        System.out.println("Nombre de livres : " + colorize(String.valueOf(library.getBooks().size()), CYAN));
+        System.out.println("Nombre de livres empruntés : " + colorize(String.valueOf(library.getBooks().size() - library.getAvailableBooks().size()), CYAN));
+        System.out.println("Nombre de livres disponibles : " + colorize(String.valueOf(library.getAvailableBooks().size()), CYAN));
+
+    }
+
+    public static void displayStatsMembers(Library library) {
+        System.out.println("Statistiques des membres de la bibliothèque " + colorize(library.getName(), PURPLE));
+        System.out.println("Nombre de membres : " + colorize(String.valueOf(library.getMembers().size()), CYAN));
+        System.out.println("Nombre de membres réguliers : " + colorize(String.valueOf(library.getRegularMembers().size()), CYAN));
+        System.out.println("Nombre de membres occasionnels : " + colorize(String.valueOf(library.getOccasionalMembers().size()), CYAN));
+        System.out.println("Nombre de visiteurs : " + colorize(String.valueOf(library.getVisitorMembers().size()), CYAN));
+    }
+
+    public static void displayStatsRentals(Library library) {
+        System.out.println("Statistiques des emprunts de la bibliothèque " + colorize(library.getName(), PURPLE));
+        System.out.println("Nombre d'emprunts : " + colorize(String.valueOf(library.getRentals().size()), CYAN));
+        System.out.println("Nombre d'emprunts en cours : " + colorize(String.valueOf(library.getRentals().size() - library.getHistoryRental().size()), CYAN));
+        System.out.println("Nombre d'emprunts terminés : " + colorize(String.valueOf(library.getHistoryRental().size()), CYAN));
     }
 }
