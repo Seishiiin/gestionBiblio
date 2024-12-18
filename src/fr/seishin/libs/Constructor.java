@@ -6,11 +6,11 @@ import fr.seishin.members.Member;
 import fr.seishin.rentals.Rental;
 
 public class Constructor {
-    public static void Book(Book book , Library library) {
+    public static void Book(Book book, Library library) {
         library.addBook(book);
     }
 
-    public static void Member(Member member , Library library) {
+    public static void Member(Member member, Library library) {
         library.addMember(member);
     }
 

@@ -28,9 +28,23 @@ public abstract class Rental {
         return dateEnd.before(new Date());
     }
 
-    public int getId() { return id; }
-    public Book getBook() { return book; }
-    public Member getMember() { return member; }
-    public String getDateStart() { return new SimpleDateFormat("dd/MM/yyyy").format(dateStart); }
-    public String getDateEnd() { return new SimpleDateFormat("dd/MM/yyyy").format(dateEnd); }
+    public int getId() {
+        return id;
+    }
+
+    public Book getBook() {
+        return book;
+    }
+
+    public Member getMember() {
+        return member;
+    }
+
+    public String getDateStart() {
+        return new SimpleDateFormat("dd/MM/yyyy").format(dateStart);
+    }
+
+    public String getDateEnd() {
+        return new SimpleDateFormat("dd/MM/yyyy").format(dateEnd);
+    }
 }

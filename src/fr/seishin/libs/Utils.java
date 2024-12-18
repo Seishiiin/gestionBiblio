@@ -1,8 +1,10 @@
 package fr.seishin.libs;
 
-import fr.seishin.books.Book;
+import fr.seishin.books.*;
+import fr.seishin.librairies.Library;
+import fr.seishin.libs.data.*;
 import fr.seishin.members.*;
-import fr.seishin.rentals.Rental;
+import fr.seishin.rentals.*;
 
 import java.util.ArrayList;
 
@@ -36,19 +38,24 @@ public class Utils {
         return new int[]{maxfirst, maxsecond, maxthird, maxfourth};
     }
 
-    public static void manageChoiceMenu(int choice) {
+    public static void manageChoiceMenu(int[] maxlenght, Library library, int choice) {
         switch (choice) {
-            case 10 -> System.out.println("Vous avez choisi d'afficher les livres.");
-            case 11 -> System.out.println("Vous avez choisi d'ajouter un livre.");
-            case 12 -> System.out.println("Vous avez choisi de supprimer un livre.");
+            case 10 -> Display.displayBooks(maxlenght, library.getBooks());
+            case 11 -> AddData.addBook(library);
+            case 12 -> UpdateData.updateBook(library);
+            case 13 -> DeleteData.deleteBook(library);
+            case 14 -> SearchData.searchBook(library);
 
-            case 20 -> System.out.println("Vous avez choisi d'afficher les membres.");
-            case 21 -> System.out.println("Vous avez choisi d'ajouter un membre.");
-            case 22 -> System.out.println("Vous avez choisi de supprimer un membre.");
+            case 20 -> Display.displayMembers(maxlenght, library.getMembers());
+            case 21 -> AddData.addMember(library);
+            case 22 -> UpdateData.updateMember(library);
+            case 23 -> DeleteData.deleteMember(library);
+            case 24 -> SearchData.searchMember(library);
 
-            case 30 -> System.out.println("Vous avez choisi d'afficher les emprunts.");
-            case 31 -> System.out.println("Vous avez choisi d'ajouter un emprunt.");
-            case 32 -> System.out.println("Vous avez choisi de supprimer un emprunt.");
+            case 30 -> Display.displayRentals(maxlenght, library.getRentals());
+            case 31 -> AddData.addRental(library);
+            case 32 -> DeleteData.deleteRental(library);
+            case 33 -> SearchData.searchRental(library);
 
             case 90 -> System.exit(0);
 
@@ -56,6 +63,38 @@ public class Utils {
         }
 
         System.out.println();
+    }
+
+    private static void updateBook(Library library) {
+
+    }
+
+    private static void deleteBook(Library library) {
+
+    }
+
+    private static void searchBook(Library library) {
+
+    }
+
+    private static void updateMember(Library library) {
+
+    }
+
+    private static void deleteMember(Library library) {
+
+    }
+
+    private static void searchMember(Library library) {
+
+    }
+
+    private static void deleteRental(Library library) {
+
+    }
+
+    private static void searchRental(Library library) {
+
     }
 
     public static String getMemberTypeColor(Member member) {
@@ -70,7 +109,8 @@ public class Utils {
     public static String getBookAvailabilityColor(Book book) {
         return switch (String.valueOf(book.isAvailable())) {
             case "true" -> colorize("(disponible)", GREEN);
-            case "false" -> colorize("(emprunté par " + book.getBorrowedBy().getName() + " " + book.getBorrowedBy().getFirstName() + ")", RED);
+            case "false" ->
+                    colorize("(emprunté par " + book.getBorrowedBy().getName() + " " + book.getBorrowedBy().getFirstName() + ")", RED);
             default -> "";
         };
     }

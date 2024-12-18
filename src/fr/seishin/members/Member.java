@@ -21,17 +21,51 @@ public abstract class Member {
         count += 1;
     }
 
-    public int getId() { return this.id; }
-    public String getName() { return this.name; }
-    public String getFirstName() { return this.firstName; }
-    public String getEmail() { return this.email; }
-    public String getPhone() { return this.phone; }
-    public String getAddress() { return this.address; }
+    public int getId() {
+        return this.id;
+    }
 
-    public void setId(int id) { this.id = id; }
-    public void setName(String name) { this.name = name; }
-    public void setFirstName(String firstName) { this.firstName = firstName; }
-    public void setEmail(String email) { this.email = email; }
-    public void setPhone(String phone) { this.phone = phone; }
-    public void setAddress(String address) { this.address = address; }
+    public String getName() {
+        return this.name;
+    }
+
+    public String getFirstName() {
+        return this.firstName;
+    }
+
+    public String getEmail() {
+        return this.email;
+    }
+
+    public String getPhone() {
+        return this.phone;
+    }
+
+    public String getAddress() {
+        return this.address;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public void setPhone(String phone) {
+        this.phone = phone;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
+    }
 }

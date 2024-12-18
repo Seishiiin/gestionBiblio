@@ -28,10 +28,62 @@ public class Library {
         rentals.add(rental);
     }
 
-    public String getName() { return name; }
-    public ArrayList<Book> getBooks() { return books; }
-    public ArrayList<Member> getMembers() { return members; }
-    public ArrayList<Rental> getRentals() { return rentals; }
+    public void removeBook(Book book) {
+        books.remove(book);
+    }
 
-    public void setName(String name) { this.name = name; }
+    public void removeMember(Member member) {
+        members.remove(member);
+    }
+
+    public void removeRental(Rental rental) {
+        rentals.remove(rental);
+    }
+
+    public Book getBookByIsbn(int isbn) {
+        for (Book book : books) {
+            if (book.getIsbn() == isbn) {
+                return book;
+            }
+        }
+        return null;
+    }
+
+    public Member getMemberById(int i) {
+        for (Member member : members) {
+            if (member.getId() == i) {
+                return member;
+            }
+        }
+        return null;
+    }
+
+    public Rental getRentalById(int i) {
+        for (Rental rental : rentals) {
+            if (rental.getId() == i) {
+                return rental;
+            }
+        }
+        return null;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public ArrayList<Book> getBooks() {
+        return books;
+    }
+
+    public ArrayList<Member> getMembers() {
+        return members;
+    }
+
+    public ArrayList<Rental> getRentals() {
+        return rentals;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
 }

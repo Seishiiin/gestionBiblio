@@ -2,11 +2,13 @@ package fr.seishin.application;
 
 import fr.seishin.librairies.Library;
 import fr.seishin.libs.*;
+import fr.seishin.libs.data.AddData;
 
 public class Run {
     private static Run instance = new Run();
 
-    private Run() {}
+    private Run() {
+    }
 
     public static Run getInstance() {
         return instance;
