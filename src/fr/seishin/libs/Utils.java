@@ -38,36 +38,108 @@ public class Utils {
         return new int[]{maxfirst, maxsecond, maxthird, maxfourth};
     }
 
-    public static void manageChoiceMenu(int[] maxlength, Library library, int choice) {
+    public static void manageChoiceMainMenu(int[] maxlength, Library library, int choice) {
         switch (choice) {
-            case 10 -> Display.displayBooks(maxlength, library.getBooks());
-            case 11 -> AddData.addBook(library);
-            case 12 -> UpdateData.updateBook(library);
-            case 13 -> DeleteData.deleteBook(library);
-            case 14 -> SearchData.searchBook(library);
-            case 15 -> Display.displayBooks(maxlength, library.getHistoryBook());
+            case 1 -> {
+                System.out.println(colorize("-> Entrée dans le menu de gestion des livres \n", CYAN));
+                Display.displayMenuBooks(maxlength, library);
+            }
+            case 2 -> {
+                System.out.println(colorize("-> Entrée dans le menu de gestion des membres \n", BLUE));
+                Display.displayMenuMembers(maxlength, library);
+            }
+            case 3 -> {
+                System.out.println(colorize("-> Entrée dans le menu de gestion des emprunts \n", PURPLE));
+                Display.displayMenuRentals(maxlength, library);
+            }
+            case 4 -> {
+                System.out.println(colorize("-> Entrée dans le menu de gestion de la bibliothèque \n", YELLOW));
+                Display.displayMenuLibrary(library);
+            }
+            case 5 -> {
+                System.out.println(colorize("-> Entrée dans le menu de statistiques \n", GREEN));
+                Display.displayMenuStats(library);
+            }
+            case 9 -> {
+                System.out.println(colorize("-> Fermeture de l'application", RED));
+                System.exit(0);
+            }
+            default -> System.out.println(colorize("-> Erreur : Veuillez saisir un nombre valide. \n", RED));
+        }
 
-            case 20 -> Display.displayMembers(maxlength, library.getMembers());
-            case 21 -> AddData.addMember(library);
-            case 22 -> UpdateData.updateMember(library);
-            case 23 -> DeleteData.deleteMember(library);
-            case 24 -> SearchData.searchMember(library);
-            case 25 -> Display.displayMembers(maxlength, library.getHistoryMember());
+        System.out.println();
+    }
 
-            case 30 -> Display.displayRentals(maxlength, library.getRentals());
-            case 31 -> AddData.addRental(library);
-            case 33 -> DeleteData.deleteRental(library);
-            case 34 -> SearchData.searchRental(library);
-            case 35 -> Display.displayRentals(maxlength, library.getHistoryRental());
+    public static void manageChoiceMenuBooks(int[] maxlength, Library library, int choice) {
+        switch (choice) {
+            case 1 -> Display.displayBooks(maxlength, library.getBooks());
+            case 2 -> AddData.addBook(library);
+            case 3 -> UpdateData.updateBook(library);
+            case 4 -> DeleteData.deleteBook(library);
+            case 5 -> SearchData.searchBook(library);
+            case 6 -> Display.displayBooks(maxlength, library.getHistoryBook());
 
-            case 40 -> Display.displayStatsLibrary(library);
-            case 41 -> Display.displayStatsBooks(library);
-            case 42 -> Display.displayStatsMembers(library);
-            case 43 -> Display.displayStatsRentals(library);
+            case 9 -> Display.displayMainMenu(library);
 
-            case 50 -> UpdateData.updateLibrary(library);
+            default -> System.out.println(colorize("-> Erreur : Veuillez saisir un nombre valide.", RED));
+        }
 
-            case 99 -> System.exit(0);
+        System.out.println();
+    }
+
+    public static void manageChoiceMenuMembers(int[] maxlength, Library library, int choice) {
+        switch (choice) {
+            case 1 -> Display.displayMembers(maxlength, library.getMembers());
+            case 2 -> AddData.addMember(library);
+            case 3 -> UpdateData.updateMember(library);
+            case 4 -> DeleteData.deleteMember(library);
+            case 5 -> SearchData.searchMember(library);
+            case 6 -> Display.displayMembers(maxlength, library.getHistoryMember());
+
+            case 9 -> Display.displayMainMenu(library);
+
+            default -> System.out.println(colorize("-> Erreur : Veuillez saisir un nombre valide.", RED));
+        }
+
+        System.out.println();
+    }
+
+    public static void manageChoiceMenuRentals(int[] maxlength, Library library, int choice) {
+        switch (choice) {
+            case 1 -> Display.displayRentals(maxlength, library.getRentals());
+            case 2 -> AddData.addRental(library);
+            case 3 -> DeleteData.deleteRental(library);
+            case 4 -> SearchData.searchRental(library);
+            case 5 -> Display.displayRentals(maxlength, library.getHistoryRental());
+
+            case 9 -> Display.displayMainMenu(library);
+
+            default -> System.out.println(colorize("-> Erreur : Veuillez saisir un nombre valide.", RED));
+        }
+
+        System.out.println();
+    }
+
+    public static void manageChoiceMenuLibrary(Library library, int choice) {
+        switch (choice) {
+            case 1 -> UpdateData.updateLibrary(library);
+
+            case 9 -> Display.displayMainMenu(library);
+
+            default -> System.out.println(colorize("-> Erreur : Veuillez saisir un nombre valide.", RED));
+        }
+
+        System.out.println();
+    }
+
+    public static void manageChoiceMenuStats(Library library, int choice) {
+        switch (choice) {
+            case 1 -> Display.displayStatsLibrary(library);
+            case 2 -> Display.displayStatsBooks(library);
+            case 3 -> Display.displayStatsMembers(library);
+            case 4 -> Display.displayStatsRentals(library);
+
+            case 9 -> Display.displayMainMenu(library);
 
             default -> System.out.println(colorize("-> Erreur : Veuillez saisir un nombre valide.", RED));
         }

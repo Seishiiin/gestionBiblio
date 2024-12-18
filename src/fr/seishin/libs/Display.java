@@ -13,39 +13,17 @@ import java.util.Scanner;
 import static fr.seishin.libs.TerminalColor.*;
 
 public class Display {
-    public static void displayMenu(Library library) {
+    public static void displayMainMenu(Library library) {
         int[] maxlength = getMaxLengthBookAndMembresAndRentals(library.getBooks(), library.getMembers(), library.getRentals());
 
-        System.out.println("|--------------- " + (colorize(library.getName(), PURPLE)) + " ---------------|");
-        System.out.println("| 10. " + colorize("Afficher", CYAN) + " les livres");
-        System.out.println("| 11. " + colorize("Ajouter", CYAN) + " un livre");
-        System.out.println("| 12. " + colorize("Modifier", CYAN) + " un livre");
-        System.out.println("| 13. " + colorize("Supprimer", CYAN) + " un livre");
-        System.out.println("| 14. " + colorize("Rechercher", CYAN) + " un livre");
-        System.out.println("| 15. " + colorize("Historique", CYAN) + " des livres");
+        System.out.println("|---------- " + colorize(library.getName().toUpperCase(), ORANGE) + " -----------");
+        System.out.println(colorize("| 1. Gestion des livres", CYAN));
+        System.out.println(colorize("| 2. Gestion des membres", BLUE));
+        System.out.println(colorize("| 3. Gestion des emprunts", PURPLE));
+        System.out.println(colorize("| 4. Gestion de la bibliothèque", YELLOW));
+        System.out.println(colorize("| 5. Statistiques", GREEN));
         System.out.println("|");
-        System.out.println("| 20. " + colorize("Afficher", BLUE) + " les membres");
-        System.out.println("| 21. " + colorize("Ajouter", BLUE) + " un membre");
-        System.out.println("| 22. " + colorize("Modifier", BLUE) + " un membre");
-        System.out.println("| 23. " + colorize("Supprimer", BLUE) + " un membre");
-        System.out.println("| 24. " + colorize("Rechercher", BLUE) + " un membre");
-        System.out.println("| 25. " + colorize("Historique", BLUE) + " des membres");
-        System.out.println("|");
-        System.out.println("| 30. " + colorize("Afficher", PURPLE) + " les emprunts");
-        System.out.println("| 31. " + colorize("Ajouter", PURPLE) + " un emprunt");
-        System.out.println("| 32. " + colorize("Impossible de modifier un emprunt", GRAY));
-        System.out.println("| 33. " + colorize("Supprimer", PURPLE) + " un emprunt");
-        System.out.println("| 34. " + colorize("Rechercher", PURPLE) + " un emprunt");
-        System.out.println("| 35. " + colorize("Historique", PURPLE) + " des emprunts");
-        System.out.println("|");
-        System.out.println("| 40. " + colorize("Afficher", GREEN) + " les statistiques");
-        System.out.println("| 41. " + colorize("Afficher", GREEN) + " les statistiques des livres");
-        System.out.println("| 42. " + colorize("Afficher", GREEN) + " les statistiques des membres");
-        System.out.println("| 43. " + colorize("Afficher", GREEN) + " les statistiques des emprunts");
-        System.out.println("|");
-        System.out.println("| 50. " + colorize("Modifier", YELLOW) + " les informations de la bibliothèque");
-        System.out.println("|");
-        System.out.println("| 99. " + colorize("Quitter", RED) + " le programme");
+        System.out.println(colorize("| 9. Quitter", RED));
         System.out.println("|");
         System.out.print("| Faites votre choix : ");
 
@@ -53,14 +31,143 @@ public class Display {
             Scanner scanner = new Scanner(System.in);
             int choice = scanner.nextInt();
 
-            System.out.println("|" + "-".repeat(32 + library.getName().length()) + "|\n");
+            System.out.println("|" + "-".repeat(22 + library.getName().length()) + "|\n");
 
-            Utils.manageChoiceMenu(maxlength, library, choice);
+            Utils.manageChoiceMainMenu(maxlength, library, choice);
         } catch (Exception e) {
-            System.out.println("|" + "-".repeat(32 + library.getName().length()) + "|\n");
+            System.out.println("|" + "-".repeat(22 + library.getName().length()) + "|\n");
 
             System.out.println(colorize("-> Erreur : Veuillez saisir un nombre valide.\n", RED));
-            displayMenu(library);
+            displayMainMenu(library);
+        }
+    }
+
+    public static void displayMenuBooks(int[] maxlength, Library library) {
+        System.out.println("|---------- " + colorize("Gestion des livres".toUpperCase(), CYAN) + " -----------");
+        System.out.println(colorize("| 1. Afficher les livres", CYAN));
+        System.out.println(colorize("| 2. Ajouter un livre", CYAN));
+        System.out.println(colorize("| 3. Modifier un livre", CYAN));
+        System.out.println(colorize("| 4. Supprimer un livre", CYAN));
+        System.out.println(colorize("| 5. Rechercher un livre", CYAN));
+        System.out.println(colorize("| 6. Historique des livres", CYAN));
+        System.out.println("|");
+        System.out.println(colorize("| 9. Retour", RED));
+        System.out.println("|");
+        System.out.print("| Faites votre choix : ");
+
+        try {
+            Scanner scanner = new Scanner(System.in);
+            int choice = scanner.nextInt();
+
+            System.out.println("|" + "-".repeat(22 + "Gestion des livres".length()) + "|\n");
+
+            Utils.manageChoiceMenuBooks(maxlength, library, choice);
+        } catch (Exception e) {
+            System.out.println("|" + "-".repeat(22 + "Gestion des livres".length()) + "|\n");
+
+            System.out.println(colorize("-> Erreur : Veuillez saisir un nombre valide.\n", RED));
+            displayMenuBooks(maxlength, library);
+        }
+    }
+    public static void displayMenuMembers(int[] maxlength, Library library) {
+        System.out.println("|---------- " + colorize("Gestion des membres".toUpperCase(), BLUE) + " -----------");
+        System.out.println(colorize("| 1. Afficher les membres", BLUE));
+        System.out.println(colorize("| 2. Ajouter un membre", BLUE));
+        System.out.println(colorize("| 3. Modifier un membre", BLUE));
+        System.out.println(colorize("| 4. Supprimer un membre", BLUE));
+        System.out.println(colorize("| 5. Rechercher un membre", BLUE));
+        System.out.println(colorize("| 6. Historique des membres", BLUE));
+        System.out.println("|");
+        System.out.println(colorize("| 9. Retour", RED));
+        System.out.println("|");
+        System.out.print("| Faites votre choix : ");
+
+        try {
+            Scanner scanner = new Scanner(System.in);
+            int choice = scanner.nextInt();
+
+            System.out.println("|" + "-".repeat(22 + "Gestion des membres".length()) + "|\n");
+
+            Utils.manageChoiceMenuMembers(maxlength, library, choice);
+        } catch (Exception e) {
+            System.out.println("|" + "-".repeat(22 + "Gestion des membres".length()) + "|\n");
+
+            System.out.println(colorize("-> Erreur : Veuillez saisir un nombre valide.\n", RED));
+            displayMenuMembers(maxlength, library);
+        }
+    }
+    public static void displayMenuRentals(int[] maxlength, Library library) {
+        System.out.println("|---------- " + colorize("Gestion des emprunts".toUpperCase(), PURPLE) + " -----------");
+        System.out.println(colorize("| 1. Afficher les emprunts", PURPLE));
+        System.out.println(colorize("| 2. Ajouter un emprunt", PURPLE));
+        System.out.println(colorize("| 3. Impossible de modifier un emprunt", GRAY));
+        System.out.println(colorize("| 4. Supprimer un emprunt", PURPLE));
+        System.out.println(colorize("| 5. Rechercher un emprunt", PURPLE));
+        System.out.println(colorize("| 6. Historique des emprunts", PURPLE));
+        System.out.println("|");
+        System.out.println(colorize("| 9. Retour", RED));
+        System.out.println("|");
+        System.out.print("| Faites votre choix : ");
+
+        try {
+            Scanner scanner = new Scanner(System.in);
+            int choice = scanner.nextInt();
+
+            System.out.println("|" + "-".repeat(22 + "Gestion des emprunts".length()) + "|\n");
+
+            Utils.manageChoiceMenuRentals(maxlength, library, choice);
+        } catch (Exception e) {
+            System.out.println("|" + "-".repeat(22 + "Gestion des emprunts".length()) + "|\n");
+
+            System.out.println(colorize("-> Erreur : Veuillez saisir un nombre valide.\n", RED));
+            displayMenuRentals(maxlength, library);
+        }
+    }
+    public static void displayMenuLibrary(Library library) {
+        System.out.println("|---------- " + colorize("Gestion de la bibliothèque".toUpperCase(), YELLOW) + " -----------");
+        System.out.println(colorize("| 1. Modifier le nom de la bibliothèque", YELLOW));
+        System.out.println("|");
+        System.out.println(colorize("| 9. Retour", RED));
+        System.out.println("|");
+        System.out.print("| Faites votre choix : ");
+
+        try {
+            Scanner scanner = new Scanner(System.in);
+            int choice = scanner.nextInt();
+
+            System.out.println("|" + "-".repeat(22 + "Gestion de la bibliothèque".length()) + "|\n");
+
+            Utils.manageChoiceMenuLibrary(library, choice);
+        } catch (Exception e) {
+            System.out.println("|" + "-".repeat(22 + "Gestion de la bibliothèque".length()) + "|\n");
+
+            System.out.println(colorize("-> Erreur : Veuillez saisir un nombre valide.\n", RED));
+            displayMenuLibrary(library);
+        }
+    }
+    public static void displayMenuStats(Library library) {
+        System.out.println("|---------- " + colorize("Statistiques".toUpperCase(), GREEN) + " -----------");
+        System.out.println(colorize("| 1. Statistiques de la bibliothèque", GREEN));
+        System.out.println(colorize("| 2. Statistiques des livres", GREEN));
+        System.out.println(colorize("| 3. Statistiques des membres", GREEN));
+        System.out.println(colorize("| 4. Statistiques des emprunts", GREEN));
+        System.out.println("|");
+        System.out.println(colorize("| 9. Retour", RED));
+        System.out.println("|");
+        System.out.print("| Faites votre choix : ");
+
+        try {
+            Scanner scanner = new Scanner(System.in);
+            int choice = scanner.nextInt();
+
+            System.out.println("|" + "-".repeat(22 + "Statistiques".length()) + "|\n");
+
+            Utils.manageChoiceMenuStats(library, choice);
+        } catch (Exception e) {
+            System.out.println("|" + "-".repeat(22 + "Statistiques".length()) + "|\n");
+
+            System.out.println(colorize("-> Erreur : Veuillez saisir un nombre valide.\n", RED));
+            displayMenuStats(library);
         }
     }
 

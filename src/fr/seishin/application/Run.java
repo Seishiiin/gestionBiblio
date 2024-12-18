@@ -5,20 +5,17 @@ import fr.seishin.libs.*;
 import fr.seishin.libs.data.AddData;
 
 public class Run {
-    private static Run instance = new Run();
+    private static final Run instance = new Run();
 
-    private Run() {
-    }
+    private Run() {}
 
-    public static Run getInstance() {
-        return instance;
-    }
+    public static Run getInstance() { return instance; }
 
     public void run() {
         Library library = new Library("Bibliothèque de Castres");
         AddData.addData(library);
         do {
-            Display.displayMenu(library);
+            Display.displayMainMenu(library);
         } while (true);
     }
 }
